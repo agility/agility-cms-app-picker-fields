@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-	title: "Power Pickers",
+	title: "Picker Fields",
 	description: "Icon and color pickers for Agility CMS.",
 	robots: { index: false, follow: false }
 }

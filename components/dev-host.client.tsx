@@ -176,7 +176,7 @@ export const DevHost = () => {
 	return (
 		<main className="mx-auto max-w-5xl px-6 py-8">
 			<header className="mb-6">
-				<h1 className="text-xl font-semibold text-gray-900">Power Pickers — local host</h1>
+				<h1 className="text-xl font-semibold text-gray-900">Picker Fields — local host</h1>
 				<p className="mt-1 text-sm text-gray-600">
 					A stand-in for the Agility Manager App, so the fields can be driven without a CMS. Not part of the
 					shipped app.

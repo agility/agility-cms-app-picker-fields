@@ -1,9 +1,9 @@
 {
-	"name": "Power Pickers",
+	"name": "Picker Fields",
 	"version": "0.1.0",
 	"sdkVersion": "2.0.0",
 	"description": "Pickers for the two things that are always a plain text box: icons and colors. Six custom fields — four icon libraries, plus a hex color picker and a named color picker.",
-	"documentationLink": "https://github.com/agility/agility-cms-app-pickers",
+	"documentationLink": "https://github.com/agility/agility-cms-app-picker-fields",
 	"capabilities": {
 		"fields": [
 			{

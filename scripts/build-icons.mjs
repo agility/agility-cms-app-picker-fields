@@ -234,5 +234,5 @@ for (const build of builders) {
 	)
 }
 
-console.log("Power Pickers — icon assets built:")
+console.log("Picker Fields — icon assets built:")
 console.log(summary.join("\n"))

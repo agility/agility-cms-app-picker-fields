@@ -1,4 +1,4 @@
-# Power Pickers
+# Picker Fields
 
 Agility CMS custom fields for the two things that are always, in the end, a plain
 text box: **icons** and **colors**.

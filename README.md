@@ -1,7 +1,7 @@
 # Power Pickers
 
 Agility CMS custom fields for the two things that are always, in the end, a plain
-text box: **icons** and **colours**.
+text box: **icons** and **colors**.
 
 Six fields, in one app:
 
@@ -11,8 +11,8 @@ Six fields, in one app:
 | Icon — Heroicons | `/fields/icon-heroicons` | `outline/academic-cap` |
 | Icon — Font Awesome | `/fields/icon-fontawesome` | `solid/star`, `brands/github` |
 | Icon — Simple Icons (brands) | `/fields/icon-simple-icons` | `github` |
-| Colour — Hex | `/fields/colour-hex` | `#0F62FE` |
-| Colour — Named | `/fields/colour-named` | `rebeccapurple` |
+| Color — Hex | `/fields/color-hex` | `#0F62FE` |
+| Color — Named | `/fields/color-named` | `rebeccapurple` |
 
 Every value is a **plain string**, not JSON. That is the point: a front end can
 use the value directly, and a field can be switched to or from a normal text
@@ -37,9 +37,9 @@ Set on the app install; they reach every field.
 
 | Name | Effect |
 |---|---|
-| `brandSwatches` | Quick-pick swatches in both colour fields. `#0F62FE` or `Brand Blue #0F62FE`, comma or newline separated. |
+| `brandSwatches` | Quick-pick swatches in both color fields. `#0F62FE` or `Brand Blue #0F62FE`, comma or newline separated. |
 | `hexAllowAlpha` | `true` adds an opacity slider to the Hex field. Off by default — see *Transparency* below. |
-| `namedColourSet` | Replaces the CSS named colours with your own tokens: `brand-blue #0F62FE, brand-ink #101828`. |
+| `namedColorSet` | Replaces the CSS named colors with your own tokens: `brand-blue #0F62FE, brand-ink #101828`. |
 
 Anything unparseable in these is dropped silently. A typo costs one swatch, not
 the whole field.
@@ -71,16 +71,16 @@ const [style, name] = value.split("/")        // "solid/star"
 const className = `fa-${style} fa-${name}`    // Font Awesome CSS
 ```
 
-**Colours** go straight into a style or a CSS custom property:
+**Colors** go straight into a style or a CSS custom property:
 
 ```tsx
-<div style={{ "--accent": colourValue } as React.CSSProperties} />
+<div style={{ "--accent": colorValue } as React.CSSProperties} />
 ```
 
 ### Transparency
 
 The Hex field stores `#RRGGBB` and only ever produces the 8-digit `#RRGGBBAA`
-form when `hexAllowAlpha` is on **and** the colour is not fully opaque. It is off
+form when `hexAllowAlpha` is on **and** the color is not fully opaque. It is off
 by default because 8-digit hex is not safe everywhere it might land — older
 Safari, email clients, and anything that parses the value itself rather than
 handing it to a browser.
@@ -137,7 +137,7 @@ Two decisions worth knowing before changing this:
 
 Normalisation strips `width`/`height` so an icon scales to its container, keeps
 `viewBox` so it still has an aspect ratio, and leaves `currentColor` intact so
-inline copies take their colour from CSS.
+inline copies take their color from CSS.
 
 ### Adding a library
 

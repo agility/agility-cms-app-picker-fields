@@ -1,5 +1,5 @@
 /**
- * The 148 CSS named colours, from the CSS Color Module Level 4 keyword table.
+ * The 148 CSS named colors, from the CSS Color Module Level 4 keyword table.
  *
  * Generated once — the list is frozen by the spec, so this is checked in rather
  * than built. To regenerate:
@@ -7,9 +7,9 @@
  *   npm i -D color-name
  *   node -e "const n=require('color-name').default||require('color-name'); ..."
  *
- * See the note in README.md under 'Named colours'.
+ * See the note in README.md under 'Named colors'.
  */
-export const CSS_NAMED_COLOURS: Record<string, string> = {
+export const CSS_NAMED_COLORS: Record<string, string> = {
 	aliceblue: "#F0F8FF",
 	antiquewhite: "#FAEBD7",
 	aqua: "#00FFFF",
@@ -160,4 +160,4 @@ export const CSS_NAMED_COLOURS: Record<string, string> = {
 	yellowgreen: "#9ACD32"
 }
 
-export const CSS_NAMED_COLOUR_NAMES = Object.keys(CSS_NAMED_COLOURS)
+export const CSS_NAMED_COLOR_NAMES = Object.keys(CSS_NAMED_COLORS)

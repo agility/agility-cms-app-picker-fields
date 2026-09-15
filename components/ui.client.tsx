@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react"
 
 /**
- * An icon rendered as inline SVG, so it takes its colour from CSS.
+ * An icon rendered as inline SVG, so it takes its color from CSS.
  *
  * The grid uses plain <img> because it draws hundreds of icons at once and only
  * needs them to be black. This is for the few places where an icon has to sit
- * inside coloured UI — the field's own preview, the modal's selection bar —
+ * inside colored UI — the field's own preview, the modal's selection bar —
  * and match it.
  */
 export const IconGlyph = ({

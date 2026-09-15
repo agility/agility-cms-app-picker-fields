@@ -3,7 +3,7 @@ import "./globals.css"
 
 export const metadata: Metadata = {
 	title: "Power Pickers",
-	description: "Icon and colour pickers for Agility CMS.",
+	description: "Icon and color pickers for Agility CMS.",
 	robots: { index: false, follow: false }
 }
 

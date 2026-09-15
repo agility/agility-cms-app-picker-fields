@@ -12,7 +12,7 @@ import {
 	readableTextOn,
 	rgbToHex,
 	rgbToHsv
-} from "@/lib/colour"
+} from "@/lib/color"
 import { FieldGate } from "./ui.client"
 
 /** Chromium-only; feature-detected before it is offered. */
@@ -29,7 +29,7 @@ declare global {
  * A draggable 2D or 1D control.
  *
  * Pointer capture is what makes dragging feel right: without it, the pointer
- * leaving the element mid-drag drops the interaction, so the colour stops
+ * leaving the element mid-drag drops the interaction, so the color stops
  * following the cursor the moment you overshoot the edge of the square.
  */
 const useDrag = (onMove: (x: number, y: number, rect: DOMRect) => void) => {
@@ -64,7 +64,7 @@ const useDrag = (onMove: (x: number, y: number, rect: DOMRect) => void) => {
 	}
 }
 
-export const ColourHexField = () => {
+export const ColorHexField = () => {
 	const { initializing, value, setValue, readOnly, config, containerRef, onFocus, onBlur } = useAgilityField()
 
 	const allowAlpha = configFlag(config, "hexAllowAlpha")
@@ -135,7 +135,7 @@ export const ColourHexField = () => {
 
 	return (
 		<div ref={containerRef} className="p-1">
-			<FieldGate initializing={initializing} title="Hex colour picker">
+			<FieldGate initializing={initializing} title="Hex color picker">
 				<div className="rounded-lg border border-gray-200 bg-white">
 					<div className="flex items-center gap-2.5 p-2.5">
 						<button
@@ -143,7 +143,7 @@ export const ColourHexField = () => {
 							onClick={() => !readOnly && setOpen((o) => !o)}
 							disabled={readOnly}
 							aria-expanded={open}
-							aria-label={open ? "Close the colour picker" : "Open the colour picker"}
+							aria-label={open ? "Close the color picker" : "Open the color picker"}
 							className="alpha-grid h-9 w-9 shrink-0 rounded-md border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none disabled:cursor-not-allowed"
 						>
 							<span className="block h-full w-full rounded-[3px]" style={{ background: stored ?? "transparent" }} />
@@ -162,7 +162,7 @@ export const ColourHexField = () => {
 							readOnly={readOnly}
 							spellCheck={false}
 							placeholder="#000000"
-							aria-label="Hex colour value"
+							aria-label="Hex color value"
 							className="w-32 rounded-md border border-gray-300 px-2.5 py-1.5 font-mono text-sm uppercase focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 focus:outline-none read-only:bg-gray-50"
 						/>
 
@@ -174,8 +174,8 @@ export const ColourHexField = () => {
 									<button
 										type="button"
 										onClick={pickFromScreen}
-										title="Pick a colour from the screen"
-										aria-label="Pick a colour from the screen"
+										title="Pick a color from the screen"
+										aria-label="Pick a color from the screen"
 										className="rounded-md border border-gray-300 bg-white p-1.5 text-gray-600 hover:bg-gray-50 focus:ring-2 focus:ring-brand-500 focus:outline-none"
 									>
 										<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4">

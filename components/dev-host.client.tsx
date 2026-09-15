@@ -9,7 +9,7 @@ import manifest from "@/public/.well-known/agility-app.json"
  * The fields in this app are useless on their own: they are iframes that talk
  * postMessage to a host, and without one the SDK never finishes initializing.
  * Getting a real one means a CMS instance, a deployed URL and an app install —
- * far too slow a loop to build a colour picker against.
+ * far too slow a loop to build a color picker against.
  *
  * So this page implements the host half of the protocol: the initialize/context
  * handshake, setFieldValue and its echo back through the field listener,
@@ -42,7 +42,7 @@ export const DevHost = () => {
 
 	const [brandSwatches, setBrandSwatches] = useState("Brand Blue #0F62FE, Ink #101828, Signal #E8590C")
 	const [hexAllowAlpha, setHexAllowAlpha] = useState(false)
-	const [namedColourSet, setNamedColourSet] = useState("")
+	const [namedColorSet, setNamedColorSet] = useState("")
 
 	const [modal, setModal] = useState<{ name: string; title: string; props: any; closeModalID: string } | null>(null)
 
@@ -65,7 +65,7 @@ export const DevHost = () => {
 	const configuration = {
 		brandSwatches,
 		hexAllowAlpha: String(hexAllowAlpha),
-		namedColourSet
+		namedColorSet
 	}
 	const configRef = useRef(configuration)
 	configRef.current = configuration
@@ -267,10 +267,10 @@ export const DevHost = () => {
 					</label>
 
 					<label className="block">
-						<span className="text-xs font-medium text-gray-700">namedColourSet</span>
+						<span className="text-xs font-medium text-gray-700">namedColorSet</span>
 						<textarea
-							value={namedColourSet}
-							onChange={(e) => setNamedColourSet(e.target.value)}
+							value={namedColorSet}
+							onChange={(e) => setNamedColorSet(e.target.value)}
 							rows={3}
 							placeholder="brand-blue #0F62FE, brand-ink #101828"
 							className="mt-1 w-full rounded-md border border-gray-300 p-2 font-mono text-xs"

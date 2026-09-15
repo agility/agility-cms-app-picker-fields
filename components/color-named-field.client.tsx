@@ -2,21 +2,21 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useAgilityField } from "@/lib/agility-field"
-import { hexToRgb, parseNamedColourSet, readableTextOn, rgbToHsv } from "@/lib/colour"
-import { CSS_NAMED_COLOURS } from "@/lib/css-named-colours"
+import { hexToRgb, parseNamedColorSet, readableTextOn, rgbToHsv } from "@/lib/color"
+import { CSS_NAMED_COLORS } from "@/lib/css-named-colors"
 import { FieldGate } from "./ui.client"
 
 /**
  * Order the swatches so browsing works.
  *
- * Alphabetical is the wrong order for choosing a colour — it scatters every
+ * Alphabetical is the wrong order for choosing a color — it scatters every
  * blue across the whole list. Sorting by hue, then by how light it is, puts the
  * greys together at the front and walks the spectrum after them, so "something
  * like that green" is findable by eye. Search covers the case where the name is
  * already known.
  */
-const byAppearance = (colours: Record<string, string>) =>
-	Object.entries(colours)
+const byAppearance = (colors: Record<string, string>) =>
+	Object.entries(colors)
 		.map(([name, hex]) => ({ name, hex, hsv: rgbToHsv(hexToRgb(hex)) }))
 		.sort((a, b) => {
 			const greyA = a.hsv.s < 0.08
@@ -27,12 +27,12 @@ const byAppearance = (colours: Record<string, string>) =>
 			return b.hsv.v - a.hsv.v
 		})
 
-export const ColourNamedField = () => {
+export const ColorNamedField = () => {
 	const { initializing, value, setValue, readOnly, config, containerRef, onFocus, onBlur } = useAgilityField()
 
-	const custom = useMemo(() => parseNamedColourSet(config.namedColourSet), [config.namedColourSet])
-	const colours = custom ?? CSS_NAMED_COLOURS
-	const ordered = useMemo(() => byAppearance(colours), [colours])
+	const custom = useMemo(() => parseNamedColorSet(config.namedColorSet), [config.namedColorSet])
+	const colors = custom ?? CSS_NAMED_COLORS
+	const ordered = useMemo(() => byAppearance(colors), [colors])
 
 	const [open, setOpen] = useState(false)
 	const [query, setQuery] = useState("")
@@ -52,7 +52,7 @@ export const ColourNamedField = () => {
 	// The stored name may not be in the active set — a CSS name left behind after
 	// the install switched to custom tokens. Show it as unknown rather than
 	// blank, and leave the value alone.
-	const selectedHex = value ? colours[value] : undefined
+	const selectedHex = value ? colors[value] : undefined
 	const unknown = Boolean(value) && !selectedHex
 
 	const choose = (name: string) => {
@@ -62,7 +62,7 @@ export const ColourNamedField = () => {
 
 	return (
 		<div ref={containerRef} className="p-1">
-			<FieldGate initializing={initializing} title="Named colour picker">
+			<FieldGate initializing={initializing} title="Named color picker">
 				<div className="rounded-lg border border-gray-200 bg-white">
 					<div className="flex items-center gap-2.5 p-2.5">
 						<span
@@ -77,12 +77,12 @@ export const ColourNamedField = () => {
 								<>
 									<div className="truncate font-medium text-gray-900">{value}</div>
 									<div className={`truncate text-xs ${unknown ? "text-amber-700" : "text-gray-500"}`}>
-										{unknown ? "Not in the current colour set" : selectedHex}
+										{unknown ? "Not in the current color set" : selectedHex}
 									</div>
 								</>
 							) : (
 								<span className="text-gray-500">
-									{readOnly ? "No colour set" : `Choose from ${ordered.length} named colours`}
+									{readOnly ? "No color set" : `Choose from ${ordered.length} named colors`}
 								</span>
 							)}
 						</div>
@@ -125,12 +125,12 @@ export const ColourNamedField = () => {
 									if (e.key === "Escape") setOpen(false)
 									if (e.key === "Enter" && results.length > 0) choose(results[0].name)
 								}}
-								placeholder="Search colour names…"
+								placeholder="Search color names…"
 								className="w-full rounded-md border border-gray-300 px-2.5 py-1.5 text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 focus:outline-none"
 							/>
 
 							{results.length === 0 ? (
-								<p className="py-8 text-center text-sm text-gray-500">No colour names match “{query}”.</p>
+								<p className="py-8 text-center text-sm text-gray-500">No color names match “{query}”.</p>
 							) : (
 								<div className="mt-3 grid max-h-64 grid-cols-[repeat(auto-fill,minmax(86px,1fr))] gap-1.5 overflow-y-auto">
 									{results.map((c) => (

@@ -1,5 +1,5 @@
 /**
- * Colour maths for the two colour fields.
+ * Color maths for the two color fields.
  *
  * Everything is hex in and hex out, because hex is what gets stored. HSV only
  * exists inside the picker: it is the space the saturation square and hue slider
@@ -26,7 +26,7 @@ const hex2 = (n: number) => clamp(Math.round(n), 0, 255).toString(16).padStart(2
  *
  * Handles a missing #, the 3- and 4-digit shorthands, and any casing. Returns
  * 6 digits unless there is real transparency to preserve, so a fully opaque
- * colour never gets stored as 8 digits.
+ * color never gets stored as 8 digits.
  */
 export const normaliseHex = (input: string | null | undefined): string | null => {
 	let raw = (input ?? "").trim().replace(/^#/, "")
@@ -111,7 +111,7 @@ export const hsvToRgb = ({ h, s, v }: HSV): RGB => {
 }
 
 /**
- * Black or white, whichever is readable on this colour.
+ * Black or white, whichever is readable on this color.
  *
  * Uses the WCAG relative-luminance curve rather than a naive average so that
  * mid-tone yellows and blues come out right.
@@ -164,12 +164,12 @@ export const parseSwatches = (raw: string | null | undefined): Swatch[] => {
 }
 
 /**
- * Parse the `namedColourSet` app config value into name → hex.
+ * Parse the `namedColorSet` app config value into name → hex.
  *
  * Same input shape as the swatches, but here the label is the point: it is what
  * gets stored in the field, so an entry without one is no use and is skipped.
  */
-export const parseNamedColourSet = (raw: string | null | undefined): Record<string, string> | null => {
+export const parseNamedColorSet = (raw: string | null | undefined): Record<string, string> | null => {
 	if (!raw?.trim()) return null
 
 	const out: Record<string, string> = {}

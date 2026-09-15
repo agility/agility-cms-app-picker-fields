@@ -45,7 +45,7 @@ const pkgDir = (name) => {
 
 /**
  * Strip an SVG down to something that scales to its container and takes its
- * colour from CSS.
+ * color from CSS.
  *
  * `width`/`height` have to go or the icon ignores the grid cell it sits in;
  * `viewBox` stays, because it is what gives the file an aspect ratio once the

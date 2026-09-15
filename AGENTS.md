@@ -11,7 +11,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # Power Pickers
 
 Agility CMS custom-field app: icon pickers for four libraries, plus a hex and a
-named colour picker. Read `README.md` first — it covers the value formats, the
+named color picker. Read `README.md` first — it covers the value formats, the
 local host, and the icon build.
 
 ## The things that bite

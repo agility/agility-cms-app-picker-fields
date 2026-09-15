@@ -2,7 +2,7 @@
 	"name": "agility-cms-app-pickers",
 	"version": "0.1.0",
 	"private": true,
-	"description": "Power Pickers - Agility CMS custom fields for picking icons from popular icon libraries, and for picking colours (hex and CSS named).",
+	"description": "Power Pickers - Agility CMS custom fields for picking icons from popular icon libraries, and for picking colors (hex and CSS named).",
 	"engines": {
 		"node": ">=20.0.0"
 	},

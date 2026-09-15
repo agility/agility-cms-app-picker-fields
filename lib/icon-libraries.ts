@@ -20,11 +20,11 @@ export interface IconLibrary {
 	valueHint: string
 	licence: string
 	/**
-	 * Simple Icons is a set of brand marks, each with an official colour. The
-	 * picker offers that colour for copying; it never renders the grid in it,
-	 * because a wall of brand colours is unreadable.
+	 * Simple Icons is a set of brand marks, each with an official color. The
+	 * picker offers that color for copying; it never renders the grid in it,
+	 * because a wall of brand colors is unreadable.
 	 */
-	hasBrandColours?: boolean
+	hasBrandColors?: boolean
 }
 
 export const ICON_LIBRARIES: Record<IconLibraryID, IconLibrary> = {
@@ -70,7 +70,7 @@ export const ICON_LIBRARIES: Record<IconLibraryID, IconLibrary> = {
 		styleLabels: {},
 		valueHint: "Stores the brand slug, e.g. github",
 		licence: "CC0 1.0",
-		hasBrandColours: true
+		hasBrandColors: true
 	}
 }
 
@@ -90,7 +90,7 @@ export interface IconCatalogue {
 	terms: Record<string, string>
 	/** Display titles, where the slug is not the brand's own spelling. */
 	labels?: Record<string, string>
-	/** Brand colours, hex without the leading #. */
+	/** Brand colors, hex without the leading #. */
 	hex?: Record<string, string>
 }
 

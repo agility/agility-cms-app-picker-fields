@@ -40,10 +40,6 @@ export const DevHost = () => {
 	const [focused, setFocused] = useState(false)
 	const [log, setLog] = useState<string[]>([])
 
-	const [brandSwatches, setBrandSwatches] = useState("Brand Blue #0F62FE, Ink #101828, Signal #E8590C")
-	const [hexAllowAlpha, setHexAllowAlpha] = useState(false)
-	const [namedColorSet, setNamedColorSet] = useState("")
-
 	const [modal, setModal] = useState<{ name: string; title: string; props: any; closeModalID: string } | null>(null)
 
 	const fieldFrame = useRef<HTMLIFrameElement>(null)
@@ -61,14 +57,6 @@ export const DevHost = () => {
 	const post = useCallback((frame: HTMLIFrameElement | null, message: AppMessage) => {
 		frame?.contentWindow?.postMessage(message, "*")
 	}, [])
-
-	const configuration = {
-		brandSwatches,
-		hexAllowAlpha: String(hexAllowAlpha),
-		namedColorSet
-	}
-	const configRef = useRef(configuration)
-	configRef.current = configuration
 
 	const fieldNameRef = useRef(fieldName)
 	fieldNameRef.current = fieldName
@@ -112,7 +100,7 @@ export const DevHost = () => {
 						operationID: data.operationID,
 						operationType: "context",
 						arg: {
-							app: { appID: APP_ID, configuration: configRef.current },
+							app: { appID: APP_ID, configuration: {} },
 							instance: { guid: "dev-guid", websiteName: "Dev Instance" },
 							locale: "en-us",
 							...extra
@@ -244,44 +232,9 @@ export const DevHost = () => {
 				</section>
 
 				<aside className="space-y-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
-					<h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase">App config values</h2>
+					<h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase">Field value</h2>
 
 					<label className="block">
-						<span className="text-xs font-medium text-gray-700">brandSwatches</span>
-						<textarea
-							value={brandSwatches}
-							onChange={(e) => setBrandSwatches(e.target.value)}
-							rows={3}
-							className="mt-1 w-full rounded-md border border-gray-300 p-2 font-mono text-xs"
-						/>
-					</label>
-
-					<label className="flex items-center gap-2">
-						<input
-							type="checkbox"
-							checked={hexAllowAlpha}
-							onChange={(e) => setHexAllowAlpha(e.target.checked)}
-							className="h-4 w-4"
-						/>
-						<span className="text-xs font-medium text-gray-700">hexAllowAlpha</span>
-					</label>
-
-					<label className="block">
-						<span className="text-xs font-medium text-gray-700">namedColorSet</span>
-						<textarea
-							value={namedColorSet}
-							onChange={(e) => setNamedColorSet(e.target.value)}
-							rows={3}
-							placeholder="brand-blue #0F62FE, brand-ink #101828"
-							className="mt-1 w-full rounded-md border border-gray-300 p-2 font-mono text-xs"
-						/>
-					</label>
-
-					<p className="text-[11px] text-gray-500">
-						Config is read during the handshake, so switch fields (or reload) after changing these.
-					</p>
-
-					<label className="block border-t border-gray-200 pt-4">
 						<span className="text-xs font-medium text-gray-700">Set the value directly</span>
 						<input
 							value={value}

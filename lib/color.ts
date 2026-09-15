@@ -47,13 +47,6 @@ export const normaliseHex = (input: string | null | undefined): string | null =>
 	return null
 }
 
-/** Alpha as 0–1. Absent alpha is opaque. */
-export const hexAlpha = (hex: string): number => {
-	const raw = hex.replace(/^#/, "")
-	if (raw.length !== 8) return 1
-	return parseInt(raw.slice(6, 8), 16) / 255
-}
-
 export const hexToRgb = (hex: string): RGB => {
 	const raw = (normaliseHex(hex) ?? "#000000").replace(/^#/, "")
 	return {
@@ -124,58 +117,4 @@ export const readableTextOn = (hex: string): string => {
 	}
 	const luminance = 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
 	return luminance > 0.45 ? "#111827" : "#FFFFFF"
-}
-
-export interface Swatch {
-	hex: string
-	label?: string
-}
-
-/**
- * Parse the `brandSwatches` app config value.
- *
- * Accepts a comma or newline separated list, each entry either a bare hex or a
- * label followed by one — `Brand Blue #0F62FE`. Anything that will not parse is
- * dropped silently: a typo in an install setting should cost one swatch, not
- * the whole field.
- */
-export const parseSwatches = (raw: string | null | undefined): Swatch[] => {
-	if (!raw) return []
-
-	const out: Swatch[] = []
-	const seen = new Set<string>()
-
-	for (const entry of raw.split(/[\n,]/)) {
-		const text = entry.trim()
-		if (!text) continue
-
-		const match = text.match(/(#?[0-9a-fA-F]{3,8})\s*$/)
-		if (!match) continue
-
-		const hex = normaliseHex(match[1])
-		if (!hex || seen.has(hex)) continue
-		seen.add(hex)
-
-		const label = text.slice(0, match.index).trim()
-		out.push(label ? { hex, label } : { hex })
-	}
-
-	return out
-}
-
-/**
- * Parse the `namedColorSet` app config value into name → hex.
- *
- * Same input shape as the swatches, but here the label is the point: it is what
- * gets stored in the field, so an entry without one is no use and is skipped.
- */
-export const parseNamedColorSet = (raw: string | null | undefined): Record<string, string> | null => {
-	if (!raw?.trim()) return null
-
-	const out: Record<string, string> = {}
-	for (const { hex, label } of parseSwatches(raw)) {
-		if (label) out[label] = hex
-	}
-
-	return Object.keys(out).length > 0 ? out : null
 }

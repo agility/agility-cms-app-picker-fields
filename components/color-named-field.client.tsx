@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useAgilityField } from "@/lib/agility-field"
-import { hexToRgb, parseNamedColorSet, readableTextOn, rgbToHsv } from "@/lib/color"
+import { hexToRgb, readableTextOn, rgbToHsv } from "@/lib/color"
 import { CSS_NAMED_COLORS } from "@/lib/css-named-colors"
 import { FieldGate } from "./ui.client"
 
@@ -27,12 +27,12 @@ const byAppearance = (colors: Record<string, string>) =>
 			return b.hsv.v - a.hsv.v
 		})
 
-export const ColorNamedField = () => {
-	const { initializing, value, setValue, readOnly, config, containerRef, onFocus, onBlur } = useAgilityField()
+/** Fixed table, so the ordering is computed once rather than per mount. */
+const ORDERED = byAppearance(CSS_NAMED_COLORS)
 
-	const custom = useMemo(() => parseNamedColorSet(config.namedColorSet), [config.namedColorSet])
-	const colors = custom ?? CSS_NAMED_COLORS
-	const ordered = useMemo(() => byAppearance(colors), [colors])
+export const ColorNamedField = () => {
+	const { initializing, value, setValue, readOnly, containerRef, onFocus, onBlur } = useAgilityField()
+
 
 	const [open, setOpen] = useState(false)
 	const [query, setQuery] = useState("")
@@ -45,14 +45,14 @@ export const ColorNamedField = () => {
 
 	const results = useMemo(() => {
 		const q = query.trim().toLowerCase()
-		if (!q) return ordered
-		return ordered.filter((c) => c.name.toLowerCase().includes(q))
-	}, [ordered, query])
+		if (!q) return ORDERED
+		return ORDERED.filter((c) => c.name.toLowerCase().includes(q))
+	}, [query])
 
-	// The stored name may not be in the active set — a CSS name left behind after
-	// the install switched to custom tokens. Show it as unknown rather than
-	// blank, and leave the value alone.
-	const selectedHex = value ? colors[value] : undefined
+	// The stored name may not be a CSS colour name at all — the field is a plain
+	// text value underneath, so anything could be in there. Show it as unknown
+	// rather than blank, and leave the value alone.
+	const selectedHex = value ? CSS_NAMED_COLORS[value] : undefined
 	const unknown = Boolean(value) && !selectedHex
 
 	const choose = (name: string) => {
@@ -77,12 +77,12 @@ export const ColorNamedField = () => {
 								<>
 									<div className="truncate font-medium text-gray-900">{value}</div>
 									<div className={`truncate text-xs ${unknown ? "text-amber-700" : "text-gray-500"}`}>
-										{unknown ? "Not in the current color set" : selectedHex}
+										{unknown ? "Not a CSS color name" : selectedHex}
 									</div>
 								</>
 							) : (
 								<span className="text-gray-500">
-									{readOnly ? "No color set" : `Choose from ${ordered.length} named colors`}
+									{readOnly ? "No color set" : `Choose from ${ORDERED.length} named colors`}
 								</span>
 							)}
 						</div>

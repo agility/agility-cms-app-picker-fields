@@ -4,26 +4,6 @@
 	"sdkVersion": "2.0.0",
 	"description": "Pickers for the two things that are always a plain text box: icons and colors. Six custom fields — four icon libraries, plus a hex color picker and a named color picker.",
 	"documentationLink": "https://github.com/agility/agility-cms-app-pickers",
-	"configValues": [
-		{
-			"name": "brandSwatches",
-			"label": "Brand swatches",
-			"type": "string",
-			"description": "Quick-pick swatches shown in both color fields. Comma or newline separated, as '#0F62FE' or 'Brand Blue #0F62FE'. Leave blank for none."
-		},
-		{
-			"name": "hexAllowAlpha",
-			"label": "Allow transparency in the Hex Color field",
-			"type": "string",
-			"description": "Set to 'true' to add an opacity slider. Values stay #RRGGBB while fully opaque and become #RRGGBBAA once they are not. Defaults to off, because 8-digit hex is not safe everywhere."
-		},
-		{
-			"name": "namedColorSet",
-			"label": "Named color set",
-			"type": "string",
-			"description": "Replaces the 148 CSS named colors in the Named Color field with your own tokens, as 'brand-blue #0F62FE, brand-ink #101828'. Leave blank to use the CSS names."
-		}
-	],
 	"capabilities": {
 		"fields": [
 			{

@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useMemo } from "react"
+import { useCallback } from "react"
 import { contentItemMethods, setFocus, useAgilityAppSDK, useResizeHeight } from "@agility/app-sdk"
 
 /**
@@ -26,8 +26,6 @@ export interface AgilityFieldBridge {
 	readOnly: boolean
 	value: string
 	setValue: (value: string) => void
-	/** The app's install settings, flattened. Missing keys read as "". */
-	config: Record<string, string>
 	/** Attach to the outermost element so the iframe tracks its height. */
 	containerRef: (node: HTMLElement | null) => void
 	onFocus: () => void
@@ -43,7 +41,7 @@ export interface AgilityFieldBridge {
 const HEIGHT_PADDING = 16
 
 export const useAgilityField = (): AgilityFieldBridge => {
-	const { initializing, field, fieldValue, appInstallContext } = useAgilityAppSDK()
+	const { initializing, field, fieldValue } = useAgilityAppSDK()
 	const containerRef = useResizeHeight(HEIGHT_PADDING)
 
 	const setValue = useCallback(
@@ -56,15 +54,6 @@ export const useAgilityField = (): AgilityFieldBridge => {
 		[]
 	)
 
-	const config = useMemo(() => {
-		const raw = (appInstallContext?.configuration ?? {}) as Record<string, unknown>
-		const out: Record<string, string> = {}
-		for (const [key, value] of Object.entries(raw)) {
-			if (value !== null && value !== undefined) out[key] = String(value)
-		}
-		return out
-	}, [appInstallContext])
-
 	const onFocus = useCallback(() => setFocus({ isFocused: true }), [])
 	const onBlur = useCallback(() => setFocus({ isFocused: false }), [])
 
@@ -74,13 +63,8 @@ export const useAgilityField = (): AgilityFieldBridge => {
 		readOnly: field?.readOnly === true,
 		value: typeof fieldValue === "string" ? fieldValue : "",
 		setValue,
-		config,
 		containerRef,
 		onFocus,
 		onBlur
 	}
 }
-
-/** True when the app config asks for a feature that is off by default. */
-export const configFlag = (config: Record<string, string>, key: string): boolean =>
-	["true", "yes", "1", "on"].includes((config[key] ?? "").trim().toLowerCase())

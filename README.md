@@ -31,18 +31,8 @@ field without a migration.
 Open the app's base URL in a browser to check a deployment: it lists the fields
 it is serving and links to its own manifest.
 
-### App config values
-
-Set on the app install; they reach every field.
-
-| Name | Effect |
-|---|---|
-| `brandSwatches` | Quick-pick swatches in both color fields. `#0F62FE` or `Brand Blue #0F62FE`, comma or newline separated. |
-| `hexAllowAlpha` | `true` adds an opacity slider to the Hex field. Off by default — see *Transparency* below. |
-| `namedColorSet` | Replaces the CSS named colors with your own tokens: `brand-blue #0F62FE, brand-ink #101828`. |
-
-Anything unparseable in these is dropped silently. A typo costs one swatch, not
-the whole field.
+The app has **no config values**. There is nothing to set up on install: add it
+and the six fields work.
 
 ---
 
@@ -79,11 +69,13 @@ const className = `fa-${style} fa-${name}`    // Font Awesome CSS
 
 ### Transparency
 
-The Hex field stores `#RRGGBB` and only ever produces the 8-digit `#RRGGBBAA`
-form when `hexAllowAlpha` is on **and** the color is not fully opaque. It is off
-by default because 8-digit hex is not safe everywhere it might land — older
-Safari, email clients, and anything that parses the value itself rather than
-handing it to a browser.
+The Hex field always stores the 6-digit `#RRGGBB` form. There is no opacity
+control, and the 8-digit `#RRGGBBAA` form is never produced, because it is not
+safe everywhere a value might land — older Safari, email clients, and anything
+that parses the value itself rather than handing it to a browser.
+
+A value that already carries alpha still reads back correctly; it is truncated
+to its opaque form on the next edit.
 
 ---
 
@@ -104,7 +96,7 @@ To actually drive the fields, use the bundled stand-in host:
 It implements the host half of the protocol — the initialize/context handshake,
 `setFieldValue` and its echo back through the field listener, `setHeight`,
 `setFocus`, and the `openModal`/`closeModal` round trip — and shows the stored
-value, the message log, and editable app config values. It is a copy of the parts
+value and the message log. It is a copy of the parts
 of `useAppSurfaceMessages.ts` (in `agility-cms-manager-app-react`) that these
 fields use, and it does not exist in a production build.
 

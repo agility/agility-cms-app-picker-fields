@@ -1,18 +1,8 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { configFlag, useAgilityField } from "@/lib/agility-field"
-import {
-	type HSV,
-	hexAlpha,
-	hexToRgb,
-	hsvToRgb,
-	normaliseHex,
-	parseSwatches,
-	readableTextOn,
-	rgbToHex,
-	rgbToHsv
-} from "@/lib/color"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useAgilityField } from "@/lib/agility-field"
+import { type HSV, hexToRgb, hsvToRgb, normaliseHex, rgbToHex, rgbToHsv } from "@/lib/color"
 import { FieldGate } from "./ui.client"
 
 /** Chromium-only; feature-detected before it is offered. */
@@ -65,10 +55,7 @@ const useDrag = (onMove: (x: number, y: number, rect: DOMRect) => void) => {
 }
 
 export const ColorHexField = () => {
-	const { initializing, value, setValue, readOnly, config, containerRef, onFocus, onBlur } = useAgilityField()
-
-	const allowAlpha = configFlag(config, "hexAllowAlpha")
-	const swatches = useMemo(() => parseSwatches(config.brandSwatches), [config.brandSwatches])
+	const { initializing, value, setValue, readOnly, containerRef, onFocus, onBlur } = useAgilityField()
 
 	const [open, setOpen] = useState(false)
 	const stored = normaliseHex(value)
@@ -86,10 +73,9 @@ export const ColorHexField = () => {
 	 * would otherwise snap the hue to red.
 	 */
 	const [hsv, setHsv] = useState<HSV>(() => rgbToHsv(hexToRgb(stored ?? "#4F46E5")))
-	const [alpha, setAlpha] = useState(() => (stored ? hexAlpha(stored) : 1))
 	const [draft, setDraft] = useState(value)
 
-	const localHex = rgbToHex(hsvToRgb(hsv), allowAlpha ? alpha : 1)
+	const localHex = rgbToHex(hsvToRgb(hsv))
 
 	// Re-sync when the value changes underneath us — another editor, an undo, or
 	// the text box being typed into. Comparing against what this picker would
@@ -97,28 +83,24 @@ export const ColorHexField = () => {
 	useEffect(() => {
 		if (!stored || stored === localHex) return
 		setHsv(rgbToHsv(hexToRgb(stored)))
-		setAlpha(hexAlpha(stored))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [stored])
 
 	useEffect(() => setDraft(value), [value])
 
-	const commit = (next: HSV, nextAlpha = alpha) => {
+	const commit = (next: HSV) => {
 		setHsv(next)
-		setAlpha(nextAlpha)
-		setValue(rgbToHex(hsvToRgb(next), allowAlpha ? nextAlpha : 1))
+		setValue(rgbToHex(hsvToRgb(next)))
 	}
 
 	const square = useDrag((x, y) => commit({ ...hsv, s: x, v: 1 - y }))
 	const hue = useDrag((x) => commit({ ...hsv, h: x * 360 }))
-	const alphaBar = useDrag((x) => commit(hsv, x))
 
 	const commitText = (text: string) => {
 		const hex = normaliseHex(text)
 		if (!hex) return setDraft(value)
 		setHsv(rgbToHsv(hexToRgb(hex)))
-		setAlpha(hexAlpha(hex))
-		setValue(allowAlpha ? hex : (normaliseHex(hex.slice(0, 7)) ?? hex))
+		setValue(normaliseHex(hex.slice(0, 7)) ?? hex)
 	}
 
 	const pickFromScreen = async () => {
@@ -214,7 +196,7 @@ export const ColorHexField = () => {
 							>
 								<span
 									className="pointer-events-none absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-[0_0_0_1px_rgba(0,0,0,.35)]"
-									style={{ left: `${hsv.s * 100}%`, top: `${(1 - hsv.v) * 100}%`, background: localHex.slice(0, 7) }}
+									style={{ left: `${hsv.s * 100}%`, top: `${(1 - hsv.v) * 100}%`, background: localHex }}
 								/>
 							</div>
 
@@ -231,55 +213,6 @@ export const ColorHexField = () => {
 									style={{ left: `${(hsv.h / 360) * 100}%`, background: `hsl(${hsv.h} 100% 50%)` }}
 								/>
 							</div>
-
-							{allowAlpha && (
-								<div {...alphaBar} className="alpha-grid relative mt-3 h-3.5 w-full cursor-pointer rounded-full">
-									<span
-										className="absolute inset-0 rounded-full"
-										style={{
-											background: `linear-gradient(to right, transparent, ${localHex.slice(0, 7)})`
-										}}
-									/>
-									<span
-										className="pointer-events-none absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-[0_0_0_1px_rgba(0,0,0,.35)]"
-										style={{ left: `${alpha * 100}%` }}
-									/>
-								</div>
-							)}
-
-							{swatches.length > 0 && (
-								<div className="mt-3.5 border-t border-gray-100 pt-3">
-									<div className="mb-1.5 text-[11px] font-medium tracking-wide text-gray-500 uppercase">
-										Brand
-									</div>
-									<div className="flex flex-wrap gap-1.5">
-										{swatches.map((s) => (
-											<button
-												key={s.hex}
-												type="button"
-												onClick={() => commitText(s.hex)}
-												title={s.label ? `${s.label} · ${s.hex}` : s.hex}
-												className={`h-7 w-7 rounded-md border transition-transform hover:scale-110 focus:ring-2 focus:ring-brand-500 focus:outline-none ${
-													stored === s.hex ? "border-gray-900 ring-1 ring-gray-900" : "border-gray-300"
-												}`}
-												style={{ background: s.hex }}
-											>
-												{stored === s.hex && (
-													<svg
-														viewBox="0 0 24 24"
-														fill="none"
-														stroke={readableTextOn(s.hex)}
-														strokeWidth="3"
-														className="mx-auto h-3.5 w-3.5"
-													>
-														<path strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />
-													</svg>
-												)}
-											</button>
-										))}
-									</div>
-								</div>
-							)}
 						</div>
 					)}
 				</div>

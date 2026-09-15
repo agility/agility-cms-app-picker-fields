@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+	/* Agility's manager UI accent, so a field looks native in the content form. */
+	--color-brand-50: #f4f1fe;
+	--color-brand-100: #e9e3fd;
+	--color-brand-200: #d3c6fb;
+	--color-brand-300: #b7a1f7;
+	--color-brand-400: #9673f1;
+	--color-brand-500: #7846e8;
+	--color-brand-600: #6528d8;
+	--color-brand-700: #5519b5;
+	--color-brand-800: #471694;
+	--color-brand-900: #3b1578;
+}
+
+/*
+ * This document is only ever the inside of an Agility iframe. It has no chrome
+ * of its own: the host draws the field label, the description and the border,
+ * and it sizes the frame from whatever setHeight reports. A stray body margin
+ * here shows up as the field not lining up with the ones above it.
+ */
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: transparent;
+}
+
+body {
+	font-family:
+		ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-size: 14px;
+	color: var(--color-gray-900);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* The checkerboard behind a partly transparent colour, so alpha is visible. */
+.alpha-grid {
+	background-image:
+		linear-gradient(45deg, #d4d4d8 25%, transparent 25%),
+		linear-gradient(-45deg, #d4d4d8 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, #d4d4d8 75%),
+		linear-gradient(-45deg, transparent 75%, #d4d4d8 75%);
+	background-size: 12px 12px;
+	background-position:
+		0 0,
+		0 6px,
+		6px -6px,
+		-6px 0px;
+	background-color: #fff;
+}

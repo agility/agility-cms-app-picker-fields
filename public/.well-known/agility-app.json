@@ -1,0 +1,61 @@
+{
+	"name": "Power Pickers",
+	"version": "0.1.0",
+	"sdkVersion": "2.0.0",
+	"description": "Pickers for the two things that are always a plain text box: icons and colours. Six custom fields — four icon libraries, plus a hex colour picker and a named colour picker.",
+	"documentationLink": "https://github.com/agility/agility-cms-app-pickers",
+	"configValues": [
+		{
+			"name": "brandSwatches",
+			"label": "Brand swatches",
+			"type": "string",
+			"description": "Quick-pick swatches shown in both colour fields. Comma or newline separated, as '#0F62FE' or 'Brand Blue #0F62FE'. Leave blank for none."
+		},
+		{
+			"name": "hexAllowAlpha",
+			"label": "Allow transparency in the Hex Colour field",
+			"type": "string",
+			"description": "Set to 'true' to add an opacity slider. Values stay #RRGGBB while fully opaque and become #RRGGBBAA once they are not. Defaults to off, because 8-digit hex is not safe everywhere."
+		},
+		{
+			"name": "namedColourSet",
+			"label": "Named colour set",
+			"type": "string",
+			"description": "Replaces the 148 CSS named colours in the Named Colour field with your own tokens, as 'brand-blue #0F62FE, brand-ink #101828'. Leave blank to use the CSS names."
+		}
+	],
+	"capabilities": {
+		"fields": [
+			{
+				"name": "icon-lucide",
+				"label": "Icon — Lucide",
+				"description": "Pick a Lucide icon. Stores the icon name, e.g. 'arrow-right'."
+			},
+			{
+				"name": "icon-heroicons",
+				"label": "Icon — Heroicons",
+				"description": "Pick a Heroicon in any of its four styles. Stores 'style/name', e.g. 'outline/academic-cap'."
+			},
+			{
+				"name": "icon-fontawesome",
+				"label": "Icon — Font Awesome",
+				"description": "Pick a Font Awesome Free icon. Stores 'style/name', e.g. 'solid/star' or 'brands/github'."
+			},
+			{
+				"name": "icon-simple-icons",
+				"label": "Icon — Simple Icons (brands)",
+				"description": "Pick a brand logo from Simple Icons. Stores the slug, e.g. 'github'."
+			},
+			{
+				"name": "colour-hex",
+				"label": "Colour — Hex",
+				"description": "Pick a colour visually. Stores a hex value, e.g. '#0F62FE'."
+			},
+			{
+				"name": "colour-named",
+				"label": "Colour — Named",
+				"description": "Pick from the CSS named colours, or from your own named tokens. Stores the name, e.g. 'rebeccapurple'."
+			}
+		]
+	}
+}

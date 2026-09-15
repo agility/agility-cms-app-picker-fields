@@ -1,0 +1,37 @@
+{
+	"name": "agility-cms-app-pickers",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Power Pickers - Agility CMS custom fields for picking icons from popular icon libraries, and for picking colours (hex and CSS named).",
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"scripts": {
+		"prebuild": "node scripts/build-icons.mjs",
+		"predev": "node scripts/build-icons.mjs",
+		"build": "next build",
+		"dev": "next dev -p 3060",
+		"start": "next start -p 3060",
+		"lint": "next lint",
+		"typecheck": "tsc --noEmit",
+		"icons": "node scripts/build-icons.mjs"
+	},
+	"dependencies": {
+		"@agility/app-sdk": "^2.2.1",
+		"next": "^16.3.5",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0"
+	},
+	"devDependencies": {
+		"@fortawesome/fontawesome-free": "^7.3.1",
+		"@tailwindcss/postcss": "^4.1.0",
+		"@types/node": "^22.0.0",
+		"@types/react": "^19.2.0",
+		"@types/react-dom": "^19.2.0",
+		"heroicons": "^2.2.0",
+		"lucide-static": "^1.46.0",
+		"simple-icons": "^16.31.0",
+		"tailwindcss": "^4.1.0",
+		"typescript": "^5.6.0"
+	}
+}

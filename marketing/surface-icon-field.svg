@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-labelledby="t">
+	<title id="t">The icon field on a content model, with a value set and empty</title>
+
+	<style>
+		.ui { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif; }
+		.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+		.lbl { font-size: 24px; font-weight: 500; fill: #334155; }
+		.val { font-size: 29px; font-weight: 500; fill: #0F172A; }
+		.sub { font-size: 23px; fill: #64748B; }
+		.btn { font-size: 23px; font-weight: 500; fill: #334155; }
+	</style>
+
+	<rect width="1600" height="1000" fill="#F1F5F9" />
+
+	<!-- the content form -->
+	<rect x="200" y="110" width="1200" height="780" rx="20" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+
+	<g class="ui">
+		<text x="264" y="186" font-size="32" font-weight="700" fill="#0F172A">Feature Card</text>
+		<text x="264" y="222" font-size="22" fill="#94A3B8">Content Item</text>
+
+		<!-- an ordinary text field, for context -->
+		<text x="264" y="292" class="lbl">Title</text>
+		<rect x="264" y="310" width="1072" height="80" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+		<text x="292" y="358" font-size="27" fill="#0F172A">Fast, everywhere</text>
+
+		<!-- the icon field, with a value -->
+		<text x="264" y="452" class="lbl">Icon</text>
+		<rect x="264" y="470" width="1072" height="128" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+
+		<rect x="284" y="490" width="88" height="88" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" />
+		<g transform="translate(304 510) scale(2)">
+			<path d="M12 2l2.9 6.26L22 9.27l-5.2 4.87L18.2 21 12 17.6 5.8 21l1.4-6.86L2 9.27l7.1-1.01z" fill="#1E293B" />
+		</g>
+
+		<text x="396" y="524" class="val">star</text>
+		<rect x="396" y="540" width="84" height="34" rx="7" fill="#F1F5F9" />
+		<text x="438" y="564" font-size="21" font-weight="500" fill="#475569" text-anchor="middle">Solid</text>
+		<text x="496" y="564" class="sub">Font Awesome Free</text>
+
+		<rect x="1094" y="512" width="116" height="52" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+		<text x="1152" y="545" class="btn" text-anchor="middle">Change</text>
+		<text x="1268" y="545" class="btn" fill="#64748B" text-anchor="middle">Clear</text>
+
+		<!-- the icon field, empty -->
+		<text x="264" y="668" class="lbl">Icon</text>
+		<rect x="264" y="686" width="1072" height="128" rx="16" fill="#FFFFFF"
+			stroke="#CBD5E1" stroke-width="2" stroke-dasharray="10 8" />
+
+		<rect x="284" y="706" width="88" height="88" rx="12" fill="#FFFFFF"
+			stroke="#CBD5E1" stroke-width="2" stroke-dasharray="8 6" />
+		<g transform="translate(308 730) scale(1.7)" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" fill="none">
+			<path d="M12 5v14M5 12h14" />
+		</g>
+
+		<text x="396" y="740" font-size="28" font-weight="500" fill="#334155">Choose a Lucide icon</text>
+		<text x="396" y="778" class="sub">Stores the icon name, e.g. arrow-right</text>
+	</g>
+
+	<text x="800" y="948" class="ui" font-size="25" fill="#64748B" text-anchor="middle">
+		Every field stores a plain text value — no JSON, no migration.
+	</text>
+</svg>

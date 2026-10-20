@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-labelledby="t">
+	<title id="t">The hex color field with its picker open</title>
+
+	<style>
+		.ui { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif; }
+		.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+	</style>
+
+	<defs>
+		<linearGradient id="sat" x1="0" y1="0" x2="1" y2="0">
+			<stop offset="0" stop-color="#FFFFFF" />
+			<stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+		</linearGradient>
+		<linearGradient id="val" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#000000" stop-opacity="0" />
+			<stop offset="1" stop-color="#000000" />
+		</linearGradient>
+		<linearGradient id="hue" x1="0" y1="0" x2="1" y2="0">
+			<stop offset="0%" stop-color="#FF0000" /><stop offset="17%" stop-color="#FFFF00" />
+			<stop offset="33%" stop-color="#00FF00" /><stop offset="50%" stop-color="#00FFFF" />
+			<stop offset="67%" stop-color="#0000FF" /><stop offset="83%" stop-color="#FF00FF" />
+			<stop offset="100%" stop-color="#FF0000" />
+		</linearGradient>
+	</defs>
+
+	<rect width="1600" height="1000" fill="#F1F5F9" />
+	<rect x="420" y="80" width="760" height="840" rx="20" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+
+	<g class="ui">
+		<text x="460" y="152" font-size="24" font-weight="500" fill="#334155">Accent color</text>
+
+		<rect x="460" y="172" width="680" height="600" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" />
+
+		<!-- the collapsed row -->
+		<rect x="484" y="196" width="72" height="72" rx="10" fill="#0F62FE" stroke="#CBD5E1" stroke-width="2" />
+		<rect x="576" y="206" width="200" height="52" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+		<text x="598" y="241" class="mono" font-size="26" fill="#0F172A">#0F62FE</text>
+
+		<!-- eyedropper -->
+		<rect x="906" y="206" width="52" height="52" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+		<g transform="translate(920 220)" stroke="#475569" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+			<path d="m16 4 4 4M18 6 8.5 15.5 5 19l-1 1 1 1 1-1 3.5-3.5L19 7" />
+		</g>
+
+		<text x="1000" y="241" font-size="24" font-weight="500" fill="#64748B" text-anchor="middle">Clear</text>
+		<rect x="1044" y="206" width="76" height="52" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+		<text x="1082" y="241" font-size="24" font-weight="500" fill="#334155" text-anchor="middle">Done</text>
+
+		<line x1="460" y1="292" x2="1140" y2="292" stroke="#E2E8F0" stroke-width="2" />
+
+		<!-- saturation / value square -->
+		<g>
+			<rect x="484" y="320" width="632" height="280" rx="10" fill="#0055FF" />
+			<rect x="484" y="320" width="632" height="280" rx="10" fill="url(#sat)" />
+			<rect x="484" y="320" width="632" height="280" rx="10" fill="url(#val)" />
+			<circle cx="1078" cy="327" r="11" fill="#0F62FE" stroke="#FFFFFF" stroke-width="3.5" />
+		</g>
+
+		<!-- hue slider -->
+		<rect x="484" y="634" width="632" height="26" rx="13" fill="url(#hue)" />
+		<circle cx="865" cy="647" r="14" fill="#0055FF" stroke="#FFFFFF" stroke-width="3.5" />
+
+		<text x="484" y="722" font-size="22" fill="#94A3B8">Always stores the 6-digit form — never 8-digit #RRGGBBAA.</text>
+	</g>
+
+	<text x="800" y="868" class="ui" font-size="25" fill="#64748B" text-anchor="middle">
+		Drag, type, paste, or pick a color from anywhere on screen.
+	</text>
+</svg>
